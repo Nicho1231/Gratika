@@ -1,0 +1,59 @@
+Soal:
+Urutkan array [12,9,30,"A","M",99,82,"J","N","B"] agar huruf diurutkan dulu secara abjad, lalu angka diurutkan dari kecil ke besar.
+Contoh output: ["A", "B", "J", "M", "N", 9, 12, 30, 82, 99]
+
+def sort_mixed_array(arr):
+    letters = sorted([x for x in arr if isinstance(x, str)])
+    numbers = sorted([x for x in arr if isinstance(x, int)])
+    return letters + numbers
+
+# Contoh penggunaan
+data = [12, 9, 30, "A", "M", 99, 82, "J", "N", "B"]
+print(sort_mixed_array(data))
+
+
+B. Fungsi pattern_count (tanpa fungsi bawaan seperti substr_count)
+Soal:
+Buat fungsi pattern_count(teks, pattern) yang menghitung berapa kali pattern muncul di dalam teks, boleh overlap.
+
+def pattern_count(text, pattern):
+    if not pattern:
+        return 0
+
+    count = 0
+    for i in range(len(text) - len(pattern) + 1):
+        if text[i:i+len(pattern)] == pattern:
+            count += 1
+    return count
+
+# Contoh penggunaan
+print(pattern_count("palindrom", "ind"))     # Output: 1
+print(pattern_count("abakadabra", "ab"))     # Output: 2
+print(pattern_count("hello", ""))            # Output: 0
+print(pattern_count("ababab", "aba"))        # Output: 2
+print(pattern_count("aaaaaa", "aa"))         # Output: 5
+print(pattern_count("hell", "hello"))        # Output: 0
+
+C. Menghitung dan Mengurutkan Huruf (Case-Sensitive)
+Soal:
+Hitung jumlah kemunculan huruf dalam input, sensitif terhadap huruf kapital, dan urutkan hasilnya secara alfabetis.
+
+from collections import defaultdict
+
+def count_letters(text):
+    freq = defaultdict(int)
+    for char in text:
+        if char.isalpha():
+            freq[char] += 1
+    sorted_result = dict(sorted(freq.items()))
+    return sorted_result
+
+# Contoh penggunaan
+print(count_letters("Hello World"))
+# Output: {'H': 1, 'W': 1, 'd': 1, 'e': 1, 'l': 3, 'o': 2, 'r': 1}
+
+print(count_letters("Bismillah"))
+# Output: {'B': 1, 'a': 1, 'h': 1, 'i': 2, 'l': 2, 'm': 1, 's': 1}
+
+print(count_letters("MasyaAllah"))
+# Output: {'A': 1, 'M': 1, 'a': 3, 'h': 1, 'l': 2, 's': 1, 'y': 1}
